@@ -1,0 +1,140 @@
+#!/usr/bin/python
+
+from fpgen import *
+from math import *
+
+# Diameter of a circle that contains a rectangle
+def dia_for_rect(w, h):
+    return sqrt(w * w + h * h)
+
+########
+
+fp = PCB_Footprint()
+fp.pin_drill_dia = 0.7
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(12) * 2
+drill_dia = fp.pin_drill_dia
+copper_dia = fp.pin_copper_dia
+
+# PA series (single row)
+pitch = 2.0
+for num_pins in range(2, 16+1):
+    fp.through_hole = True
+    
+    ########
+    # Through-hole top entry
+    fp.file = file('footprints/jst/B%02dB-PASK-1' % num_pins, 'w')
+    fp.header()
+    
+    fp.square = True
+    for pin in range(1, num_pins+1):
+        fp.pin(pin, -pitch * (pin - 1), 0)
+        fp.square = False
+    
+	if False:
+	    # Mounting boss
+	    fp.pin_drill_dia = 1.0
+	    fp.pin_copper_dia = 0
+	    fp.pin('', 1.5, 1.7)
+    fp.pin_drill_dia = drill_dia
+    fp.pin_copper_dia = copper_dia
+    
+    # Outline
+    w = pitch * (num_pins - 1)
+    h = 5.3 / 2.0
+    fp.silk_rect(-w - 2.0, -h, 2.0, h)
+    
+    x1 = -w * 2.0 / 3.0
+    x2 = -w * 1.0 / 3.0
+    y = -h + 1.0
+    fp.silk_line(x1, -h, x1, y)
+    fp.silk_line(x1, y, x2, y)
+    fp.silk_line(x2, y, x2, -h)
+    
+    fp.trailer()
+    fp.file.close()
+    
+    ########
+    # Through-hole side entry
+    
+    fp.file = file('footprints/jst/S%02dB-PASK-1' % num_pins, 'w')
+    fp.header()
+    
+    fp.square = True
+    for pin in range(1, num_pins+1):
+        fp.pin(pin, -pitch * (pin - 1), 0)
+        fp.square = False
+    
+	if False:
+	    # Mounting boss
+	    w = pitch * (num_pins - 1)
+	    fp.pin_drill_dia = 1.1
+	    fp.pin_copper_dia = 0
+	    fp.pin('', -w - 1.5, 2.1)
+	    fp.pin('', 1.5, 2.1)
+    fp.pin_drill_dia = drill_dia
+    fp.pin_copper_dia = copper_dia
+    
+    # Outline
+    fp.silk_rect(-w - 2.0, -3.5, 2.0, 8.2)
+    
+    fp.trailer()
+    fp.file.close()
+    
+    # FIXME - Surface mount top entry
+    # FIXME - Surface mount side entry
+
+# PAD series (double row)
+for num_pins in (10, 12, 14, 16, 20, 22, 24, 40):
+    ########
+    # Top entry
+    
+    fp.file = file('footprints/jst/B%02dB-PADSS-1' % num_pins, 'w')
+    fp.header()
+    
+    for pin in range(1, num_pins, 2):
+        x = -(pin - 1) / 2 * pitch
+        fp.pin(pin, x, 0.0)
+        fp.pin(pin + 1, x, 2.0)
+    
+	if False:
+	    # Mounting boss
+	    w = pitch * (num_pins / 2 - 1)
+	    fp.pin_drill_dia = 1.0
+	    fp.pin_copper_dia = 0
+	    fp.pin('', 1.3, -2.5)
+    fp.pin_drill_dia = drill_dia
+    fp.pin_copper_dia = copper_dia
+    
+    # Outline
+    fp.silk_rect(-w - 2.0, -4.9, 2.0, 5.1)
+    
+    fp.trailer()
+    fp.file.close()
+
+for num_pins in (10, 12, 14, 16, 20, 24):
+    ########
+    # Side entry
+    
+    fp.file = file('footprints/jst/S%02dB-PADSS-1' % num_pins, 'w')
+    fp.header()
+    
+    for pin in range(1, num_pins, 2):
+        x = -(pin - 1) / 2 * pitch
+        fp.pin(pin, x, 0.0)
+        fp.pin(pin + 1, x, 2.0)
+    
+	if False:
+	    # Mounting boss
+	    w = pitch * (num_pins / 2 - 1)
+	    fp.pin_drill_dia = 1.1
+	    fp.pin_copper_dia = 0
+	    fp.pin('', -w - 1.6, 3.4)
+	    fp.pin('', 1.6, 3.4)
+    fp.pin_drill_dia = drill_dia
+    fp.pin_copper_dia = copper_dia
+    
+    # Outline
+    fp.silk_rect(-w - 2.0, -0.5, 2.0, 12.7)
+    
+    fp.trailer()
+    fp.file.close()

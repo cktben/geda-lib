@@ -1,0 +1,1177 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from fpgen import *
+from math import *
+
+# Diameter of a circle that contains a rectangle
+def dia_for_rect(w, h):
+    return sqrt(w * w + h * h)
+
+fp = PCB_Footprint()
+
+########
+
+fp.file = file('footprints/ic/adxl345', 'w')
+fp.pad_width = 1.1450
+fp.pad_height = 0.5500
+fp.header()
+pitch = fp.pad_height + 0.25
+x = (3.34 - fp.pad_width) / 2
+fp.pin_row(1, 6, -x, 2.5 * pitch, 0, -pitch)
+fp.pin_row(8, 13, x, -2.5 * pitch, 0, pitch)
+
+fp.pad_width, fp.pad_height = fp.pad_height, fp.pad_width
+fp.pin(7, 0, -(5.34 - fp.pad_height) / 2)
+fp.pin(14, 0, (5.34 - fp.pad_height) / 2)
+
+w = 3.34 + fp.silk_width * 2
+h = 5.34 + fp.silk_width * 2
+fp.silk_poly([(-w/2, -h/2), (w/2, -h/2), (w/2, h/2), (-w/2 + 0.8, h/2), (-w/2, h/2 - 0.8)])
+
+fp.trailer()
+
+########
+
+fp.file = file('footprints/ic/kxtf9', 'w')
+fp.pad_width = 0.48
+fp.pad_height = 0.42
+fp.header()
+pitch = 0.65
+fp.pin_row(1, 4, -1.2,  1.5 * pitch, 0, -pitch)
+fp.pin_row(6, 9,  1.2, -1.5 * pitch, 0,  pitch)
+
+fp.pad_width, fp.pad_height = fp.pad_height, fp.pad_width
+fp.pin( 5, 0, -1.2)
+fp.pin(10, 0,  1.2)
+
+w = 3 + fp.silk_width * 2
+h = 3 + fp.silk_width * 2
+fp.silk_poly([(-w/2, -h/2), (w/2, -h/2), (w/2, h/2), (-w/2 + 0.8, h/2), (-w/2, h/2 - 0.8)])
+
+fp.trailer()
+
+########
+
+fp.file = file('footprints/oscillator/osc-7.0x5.0', 'w')
+fp.pad_width = 1.8
+fp.pad_height = 2.0
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 4
+gen.pin_pitch = 5.08
+gen.row_pitch = 4.2
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/oscillator/osc-2.5x2.0', 'w')
+fp.pad_width = 0.65
+fp.pad_height = 0.85
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 4
+gen.pin_pitch = 1.65
+gen.row_pitch = 0.7 + fp.pad_height
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/oscillator/xtal-3.2x2.5', 'w')
+fp.pad_width = 1.4
+fp.pad_height = 1.2
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 4
+gen.pin_pitch = 2.2
+gen.row_pitch = 1.6
+gen.outline = 'outside-notched'
+fp.header()
+x1 = gen.pin_pitch / 2.0
+y1 = gen.row_pitch / 2.0
+fp.pin(1, -x1, -y1)
+fp.pin('', x1, -y1)
+fp.pin(2, x1, y1)
+fp.pin('', -x1, y1)
+gen.make_outline(fp)
+fp.trailer()
+
+########
+
+fp.file = file('footprints/oscillator/xtal-8.0x4.5', 'w')
+fp.pad_width = 3.0
+fp.pad_height = 2.5
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 6.5
+gen.body_width = 4.5
+gen.body_height = 8.0
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/ind-12x12', 'w')
+fp.pad_width = 5.6
+fp.pad_height = (13.2 - 7.0) / 2.0
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = (13.2 + 7.0) / 2.0
+gen.body_width = 12.8
+gen.body_height = 12.8
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/SD8328', 'w')
+fp.pad_width = 2.9
+fp.pad_height = 1.8
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 5.7 + fp.pad_height
+gen.body_width = 8.3
+gen.body_height = 9.5
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/SDR0403', 'w')
+fp.pad_width = 4.5
+fp.pad_height = 1.8
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 1.5 + fp.pad_height
+gen.body_width = 4.5
+gen.body_height = 4.5
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/NR10050', 'w')
+fp.pad_width = 4.5
+fp.pad_height = 2.6
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 5.4 + fp.pad_height
+gen.body_width = 10.0
+gen.body_height = 9.8
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/VLCF5020', 'w')
+fp.pad_width = 4.9
+fp.pad_height = 2.1
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 1.3 + fp.pad_height
+gen.body_width = 5.0
+gen.body_height = 5.0
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/CDRH6D28', 'w')
+fp.pad_width = 7.3
+fp.pad_height = 2.65
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 2.0 + fp.pad_height
+gen.body_width = 6.7
+gen.body_height = 6.7
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+# Cooper-Bussmann DR-series inductors
+
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.outline = 'outside'
+
+# DR74 is the same footprint but taller
+fp.file = file('footprints/inductor/DR73', 'w')
+fp.pad_width = 3.25
+fp.pad_height = 2.50
+gen.row_pitch = 8.5 - fp.pad_height
+gen.body_width = 7.6
+gen.body_height = 7.6
+gen.run(fp)
+
+# DR127 is the same footprint but taller
+fp.file = file('footprints/inductor/DR125', 'w')
+fp.pad_width = 5.50
+fp.pad_height = 3.85
+gen.row_pitch = 13.8 - fp.pad_height
+gen.body_width = 12.5
+gen.body_height = 12.5
+gen.run(fp)
+
+########
+
+# SMD capacitors
+# See drawing in http://www.chemi-con.com/files/MZA.pdf
+
+# ab = Width/height of body
+# c = Outside distance across pins
+# p = Inside distance between pins
+# w = Width of pins
+#
+# FIXME - There is no documentation on the bevel!
+gen = Generate_SMD_Two_Rows()
+def cap(ab, c, w, p):
+    # Make pads larger than pins
+    pad_p = p - 0.1
+    pad_c = c + 1.0 * 2.0
+    
+    fp.file = file('footprints/capacitor/cap-smd-%.1f' % ab, 'w')
+    fp.pad_width = w * 1.2
+    fp.pad_height = (pad_c - pad_p) / 2.0
+    gen.num_pins = 2
+    gen.pin_pitch = 0
+    gen.row_pitch = (pad_c + pad_p) / 2.0
+    gen.body_width = ab
+    gen.body_height = ab
+    gen.bevel = 1.0
+    gen.outline = 'outside-bevel'
+    gen.run(fp)
+
+cap(4.3, 5.1, 0.8, 1.0)
+cap(5.3, 5.9, 0.8, 1.4)
+cap(6.6, 7.2, 0.8, 1.9)
+cap(8.3, 9.0, 1.1, 3.1)
+cap(10.3, 11.0, 1.1, 4.5)
+
+########
+
+fp.file = file('footprints/ic/ETSSOP16', 'w')
+fp.pad_width = 0.42
+fp.pad_height = 1.78
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 16
+gen.pin_pitch = 0.65
+gen.row_pitch = (7.72 + 4.16) / 2
+gen.body_width = 5.0
+gen.body_height = 4.4
+gen.outline = 'outside-notched'
+gen.dap_width = 3.0
+gen.dap_height = 3.0
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/ic/TSSOP20W', 'w')
+fp.pad_width = 0.44
+fp.pad_height = 1.75
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 20
+gen.pin_pitch = 0.65
+gen.row_pitch = 7.2
+gen.body_width = 7.20
+gen.body_height = 7.80
+gen.outline = 'outside-notched'
+gen.dap_width = 0
+gen.dap_height = 0
+gen.run(fp)
+
+########
+
+# http://cds.linear.com/docs/Packaging/QFN_64_05-08-1705.pdf
+fp.file = file('footprints/ic/QFN64_9_EP', 'w')
+fp.pad_width = 0.25
+fp.pad_height = 0.7
+gen = Generate_QFN()
+gen.num_pins = 64
+gen.pin_pitch = 0.50
+gen.package_size = 9.00
+gen.inside = 8.1
+gen.dap_width = 7.15
+gen.dap_height = 7.15
+gen.run(fp)
+
+########
+
+# height:
+# 0.6 pin on 1.78 pad: 0.66 outside, 0.52 inside
+#   about one pin inside/outside
+# 
+# width:
+# 0.3 pin on 0.42 pad: 0.06 extra (20%)
+
+fp.file = file('footprints/ic/TSSOP44', 'w')
+fp.pad_width = 0.4 * 1.2
+fp.pad_height = 0.6 * 2.0
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 44
+gen.pin_pitch = 0.8
+gen.row_pitch = (11.938 - 0.406 + 11.735 - 0.597) / 2
+gen.body_width = 18.517
+gen.body_height = 10.262
+gen.outline = 'outside-notched'
+gen.dap_width = 0
+gen.dap_height = 0
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/ic/MSOP-10', 'w')
+fp.pad_width = 0.3
+fp.pad_height = 0.60 * 2.0
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 10
+gen.pin_pitch = 0.50
+gen.row_pitch = 4.90 - 0.60
+gen.body_width = 3.00
+gen.body_height = 3.00
+gen.outline = 'outside-notched'
+gen.dap_width = 0
+gen.dap_height = 0
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/ic/MSOP-10-EP', 'w')
+fp.pad_width = 0.3
+fp.pad_height = 0.60 * 2.0
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 10
+gen.pin_pitch = 0.50
+gen.row_pitch = 4.90 - 0.60
+gen.body_width = 3.00
+gen.body_height = 3.00
+gen.outline = 'outside-notched'
+gen.dap_width = 2.794
+gen.dap_height = 2.083
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/ic/LFCSP-WD-10', 'w')
+fp.pad_width = 0.23 * 1.2
+fp.pad_height = 0.40 * 2.0          # See row_pitch below
+gen = Generate_SMD_Two_Rows()
+gen.body_width = 3.00
+gen.body_height = 3.00
+gen.num_pins = 10
+gen.pin_pitch = 0.50
+gen.row_pitch = gen.body_height     # Full height inside, full height outside
+gen.outline = 'outside-notched'
+gen.dap_width = 2.38
+gen.dap_height = 1.64
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/diode/sma', 'w')
+fp.pad_width = 1.52
+fp.pad_height = 1.68
+
+diode = Generate_SMD_Diode()
+diode.inside_distance = 1.88
+diode.body_width = 4.50
+diode.body_height = 2.79
+diode.run(fp)
+
+########
+
+fp.file = file('footprints/diode/smb', 'w')
+fp.pad_width = 1.52
+fp.pad_height = 2.18
+
+diode = Generate_SMD_Diode()
+diode.inside_distance = 2.159
+diode.body_width = 4.57
+diode.body_height = 3.94
+diode.run(fp)
+
+########
+
+fp.file = file('footprints/diode/smc', 'w')
+fp.pad_width = 2.794
+fp.pad_height = 3.810
+
+diode = Generate_SMD_Diode()
+diode.inside_distance = 4.343
+diode.body_width = 7.11
+diode.body_height = 6.10
+diode.run(fp)
+
+########
+
+# TQ2SA relays
+fp.file = file('footprints/misc/tq2sa', 'w')
+fp.pad_width = 1.0
+fp.pad_height = 2.94
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 10
+gen.pin_pitch = 2.54
+gen.row_pitch = 9.56
+gen.body_width = 14.0
+gen.body_height = 9.0
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+# Barrel jack
+fp.file = file('footprints/connector/barrel-jack', 'w')
+fp.header()
+
+fp.square = False
+fp.through_hole = True
+fp.pin_drill_dia = dia_for_rect(1.0, 3.5)
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(20) * 2
+fp.pin(1, 0.0, 0.0)
+
+fp.pin_drill_dia = dia_for_rect(1.0, 3.0)
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(20) * 2
+fp.pin(2, 6.0, 0.0)
+fp.pin(3, 3.0, 4.7)
+
+fp.silk_rect(-max(fp.silk_width * 2, 14.4 - 13.7), -4.5, 13.7, 4.5)
+
+fp.trailer()
+
+########
+
+# Screw terminal (Keystone 8191 and similar)
+fp.file = file('footprints/connector/screw-terminal', 'w')
+fp.header()
+
+fp.square = False
+fp.through_hole = True
+fp.pin_drill_dia = 1.85
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(20) * 2
+fp.pin(1, -2.5, -3.5)
+fp.pin(1, 2.5, -3.5)
+fp.pin(1, 2.5, 3.5)
+fp.pin(1, -2.5, 3.5)
+fp.silk_rect(-4, -4, 4, 4)
+
+fp.trailer()
+
+########
+
+# Automotive (ATO) fuse holder (Keystone 3522 x2 or 3522-2)
+fp.file = file('footprints/connector/ato-fuseholder', 'w')
+fp.header()
+
+fp.square = False
+fp.through_hole = True
+fp.pin_drill_dia = 2.6
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(20) * 2
+fp.pin(1, -2.05 - 5.1, 0)
+fp.pin(1, -2.05, 0)
+fp.pin(2, 2.05, 0)
+fp.pin(2, 2.05 + 5.1, 0)
+fp.silk_rect(-9.7, -2.25, 9.7, 2.25)
+
+fp.trailer()
+fp.through_hole = False
+fp.square = True
+
+########
+
+# Belfuse SSQ
+
+fp.file = file('footprints/misc/SSQ', 'w')
+fp.pad_width = 3.18
+fp.pad_height = 2.0
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 3.0 + fp.pad_height
+gen.body_width = 2.54
+gen.body_height = 6.10
+gen.outline = 'outside'
+gen.run(fp)
+
+########
+
+# TO-263-7 (from LM22676 datasheet)
+
+fp.file = file('footprints/ic/to-263-7', 'w')
+fp.through_hole = False
+fp.square = True
+fp.header()
+fp.pad_width = 0.91
+fp.pad_height = 2.41
+fp.pin_row(1, 7, 0, 0, 1.27, 0)
+fp.pad_width = 6.35
+fp.pad_height = 6.35
+fp.pin(4, 1.27 * 3, 12.4 - 6.35 / 2)
+fp.trailer()
+
+########
+
+# Johanson 0896BM15A0001 ceramic balun/matching network
+
+fp.file = file('footprints/misc/balun-smt-6', 'w')
+fp.pad_width = 0.36
+fp.pad_height = 0.6
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 6
+gen.pin_pitch = 0.65
+gen.row_pitch = 1.25
+gen.body_width = 2
+gen.body_height = 1.25
+gen.outline = 'outside-notched'
+gen.notch_depth = 0.4
+gen.run(fp)
+
+########
+
+# Toshiba TCA62724FMG
+
+fp.file = file('footprints/ic/son10', 'w')
+fp.pad_width = 0.3
+fp.pad_height = 0.65
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 10
+gen.pin_pitch = 0.5
+gen.row_pitch = 2.95
+gen.body_width = 2.9
+gen.body_height = 3.0
+gen.outline = 'outside-notched'
+gen.notch_depth = 0.4
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/connector/usb-b-mini-horiz', 'w')
+fp.header()
+
+# Pins
+fp.pad_width = 0.5
+fp.pad_height = 2.3
+pitch = 0.8
+y = 3.75 - fp.pad_height / 2
+fp.pin_row(1, 5, -2 * pitch, y, pitch, 0)
+
+# Mounting ears
+fp.pad_width = 2.0
+fp.pad_height = 2.5
+x = (10.9 - fp.pad_width) / 2
+y = 3.75 - fp.pad_height / 2
+fp.pin('M1', x, y)
+fp.pin('M2', -x, y)
+y = 3.75 - 5.5 - fp.pad_height / 2
+fp.pin('M3', -x, y)
+fp.pin('M4', x, y)
+
+# Alignment holes
+fp.square = False
+fp.through_hole = True
+fp.pin_drill_dia = 0.9
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(10) * 2
+fp.pin('A1', -2.2, 0)
+fp.pin('A2', 2.2, 0)
+fp.square = True
+fp.through_hole = False
+
+fp.silk_line(-10.9 / 2, -9.0 / 2, 10.9 / 2, -9.0 / 2)
+
+fp.trailer()
+
+########
+
+fp.file = file('footprints/capacitor/0805-feedthru', 'w')
+fp.header()
+
+# From the AVX W2H datasheet
+T = 3.45
+P = 0.51
+S = 0.76
+W = 1.27
+L = 1.02
+C = 0.46
+
+fp.pad_width = L
+fp.pad_height = W
+fp.pin('1', -(P/2 + C + L/2), 0)
+fp.pin('2', P/2 + C + L/2, 0)
+
+fp.pad_width = P
+fp.pad_height = P
+fp.pin('3', 0, S/2 + P/2)
+fp.pin('3', 0, -(S/2 + P/2))
+
+fp.trailer()
+
+########
+
+# Molex Mi II 2mm SMD headers
+back_dist = 5.2		# 4.4mm minimum
+front_dist = 2.3
+
+for n in (2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 15):
+	fp.file = file('footprints/connector/2mm-smd-%d' % n, 'w')
+	fp.header()
+	
+	fp.pad_width = 1.2
+	fp.pad_height = back_dist - front_dist
+	y = (back_dist + front_dist) / 2.0
+	x1 = n - 1.0
+	fp.pin_row(1, n, -x1, y, 2.0, 0)
+	
+	fp.pad_width = 2.1
+	fp.pad_height = 3.0
+	fp.pin('M1', -(x1 + 1.2/2 + 0.55 + 2.1/2), 3.0/2)
+	fp.pin('M2',   x1 + 1.2/2 + 0.55 + 2.1/2,  3.0/2)
+	
+	fp.trailer()
+
+########
+
+fp.file = file('footprints/ic/SC88A', 'w')
+fp.pad_width = 0.35
+fp.pad_height = 0.70
+fp.header()
+fp.pin_row(1, 3, -0.65, -1.90/2, 0.65, 0)
+fp.pin(4, 0.65, 1.90/2)
+fp.pin(5, -0.65, 1.90/2)
+sx = 1.0
+sy = 1.90 / 2 - fp.pad_height / 2 - 0.25
+fp.silk_rect(-sx, -sy, sx, sy)
+fp.trailer()
+
+########
+
+# Molex 52207 series 1.0mm ZIF FPC connectors
+
+# Y=0 is the line dividing the signal pads from the mounting pads
+# 34 pins is also available, but who wants that?
+for n in range(3,31):
+	fp.file = file('footprints/molex_52207/52207-%02d85' % n, 'w')
+	fp.header()
+	
+	fp.pad_width = 0.6
+	fp.pad_height = 1.9
+	y = fp.pad_height / 2.0
+	x1 = (n - 1) / 2.0
+	fp.pin_row(1, n, -x1, y, 1.0, 0)
+	
+	fp.pad_width = 2.1
+	fp.pad_height = 2.8
+	fp.pin('M1', -(x1 + 2.1 + fp.pad_width / 2.0), -fp.pad_height / 2.0)
+	fp.pin('M2',   x1 + 2.1 + fp.pad_width / 2.0,  -fp.pad_height / 2.0)
+
+	w = mil_to_mm(10)
+	fp.silk_line(-x1 - 3.5, -fp.pad_height - w, -x1 - 3.5, -5.6 - 0.6)
+	fp.silk_line(-x1 - 3.5, -5.6 - 0.6, x1 + 3.5, -5.6 - 0.6)
+	fp.silk_line(x1 + 3.5, -5.6 - 0.6, x1 + 3.5, -fp.pad_height - w)
+	
+	fp.trailer()
+
+########
+
+# TE 84981 series 1.0mm non-ZIF FPC connectors
+
+# Y=0 is the bottom of the signal pads
+for n in range(4,31):
+	if n < 10:
+		name = '84981-%d' % n
+	else:
+		name = '%d-84981-%d' % (n / 10, n % 10)
+
+	fp.file = file('footprints/te_84981/%s' % name, 'w')
+	fp.header()
+	
+	fp.pad_width = 0.6
+	fp.pad_height = 1.7
+	y = fp.pad_height / 2.0
+	x1 = (n - 1) / 2.0
+	fp.pin_row(1, n, -x1, y, 1.0, 0)
+	
+	fp.pad_width = 1.2
+	fp.pad_height = 1.80
+	fp.pin('M1', -(x1 + 1.2 + fp.pad_width / 2.0), -(3.5 + fp.pad_height / 2.0))
+	fp.pin('M2',   x1 + 1.2 + fp.pad_width / 2.0,  -(3.5 + fp.pad_height / 2.0))
+
+	w = mil_to_mm(10)
+	G = n + 3.0
+	fp.silk_rect(-G/2, 0.5, G/2, -5.1)
+	
+	fp.trailer()
+
+########
+
+fp.through_hole = True
+pitch = mil_to_mm(50)
+fp.pin_drill_dia = mil_to_mm(28)
+fp.pin_copper_dia = mil_to_mm(40)
+for n in (10,):
+	fp.file = file('footprints/connector/header-%d-050-2' % n, 'w')
+	fp.header()
+	fp.square = True
+	fp.pin(1, 0, 0)
+	fp.square = False
+	fp.pin_row(3, n, pitch, 0, pitch, 0, 2)
+	fp.pin_row(2, n, 0, pitch, pitch, 0, 2)
+	fp.trailer()
+fp.through_hole = False
+fp.square = True
+
+########
+
+# 0.050-pitch unshrouded headers with alignment holes
+
+pitch = mil_to_mm(50)
+fp.pad_width = 0.74
+fp.pad_height = 1.85
+fp.pin_drill_dia = 0.90
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(12)
+total_height = mil_to_mm(240)
+for n in range(2, 50, 2):
+	fp.file = file('footprints/connector/header-%d-050-smd' % n, 'w')
+	fp.header()
+	fp.pin_row(1, n, 0, 0, pitch, 0, 2)
+	fp.pin_row(2, n, 0, total_height - fp.pad_height, pitch, 0, 2)
+	if n > 4:
+		# Alignment holes
+		fp.through_hole = True
+		fp.square = False
+		y = total_height / 2 - fp.pad_height / 2
+		fp.pin('', pitch / 2, y)
+		fp.pin('', (n / 2 - 1.5) * pitch, y)
+		fp.through_hole = False
+		fp.square = True
+	fp.silk_rect(-pitch / 2, fp.pad_height / 2 + fp.silk_width * 2, (n/2 - 0.5) * pitch, total_height - fp.pad_height * 1.5 - fp.silk_width * 2)
+	fp.trailer()
+
+########
+
+fp.file = file('footprints/ic/PG-TDSON-8', 'w')
+fp.header()
+
+# Drain pads
+fp.pad_width = (4.32 - 0.49) / 2
+fp.pad_height = 3.71 - 2.47 + 3.05
+fp.pin(78, -(4.32/2 - fp.pad_width/2), 3.05 - fp.pad_height/2)
+fp.pin(56, 4.32/2 - fp.pad_width/2, 3.05 - fp.pad_height/2)
+
+# Small pads 1-4
+fp.pad_width = 0.47
+fp.pad_height = 0.90
+fp.pin_row(1, 4, -1.27 - 0.635, -(3.05 - fp.pad_height/2), 1.27, 0)
+
+sx = 2.5
+sy = 3.3
+fp.silk_rect(-sx, -sy, sx, sy)
+
+fp.trailer()
+
+########
+# Socket for XP2902 photomultiplier tube.
+# Made of 14x Mill-max 0327-0-15-01-34-27-10-0
+
+fp.file = file('footprints/connector/XP2902', 'w')
+fp.header()
+fp.square = True
+fp.through_hole = True
+fp.pin_drill_dia = mil_to_mm(75)
+fp.pin_copper_dia = mil_to_mm(100)
+r = 19.05/2.0       # Pin circle radius
+for i in range(1, 15):
+    angle = -i * 2 * pi / 15 - pi/2
+    fp.pin(i, r * cos(angle), r * sin(angle))
+    fp.square = False
+fp.silk_circle(0, 0, 28.05/2)
+fp.silk_circle(0, 0, 7.5/2)
+fp.trailer()
+fp.square = True
+fp.through_hole = False
+
+########
+
+fp.file = file('footprints/connector/VHDC', 'w')
+fp.header()
+fp.square = False
+fp.through_hole = True
+old_clearance = fp.pin_clearance
+fp.pin_clearance = mil_to_mm(6)
+
+# Shield connections
+fp.pin_drill_dia = 1.20
+fp.pin_copper_dia = 2.25
+fp.pin('S1', 0, 0)
+fp.pin('S2', -32.35, 0)
+
+#FIXME - The annular ring going into PCB is perfectly fine, and gerbv agrees,
+#        but FreeDFM says it's too small by about 0.260 mil.
+
+# Alignment holes
+fp.pin_drill_dia = 1.75
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(14.6)
+fp.pin('', 4.78, -2.63)
+fp.pin('', -(41.90 - 4.78), -2.63)
+
+# Signal pins
+fp.pin_drill_dia = 0.65
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(14.6)
+row_x_2 = -(32.35 - 2.78) + 16 * 1.60
+row_x_4 = row_x_2 + 0.40
+row_x_1 = row_x_4 + 0.40
+row_x_3 = row_x_1 + 0.40
+row_y_4 = -1.25
+row_y_3 = row_y_4 + 1.15
+row_y_2 = row_y_3 + 1.20
+row_y_1 = row_y_2 + 1.15
+fp.pin_row(1, 33, row_x_1, row_y_1, -1.60, 0, 2)
+fp.pin_row(2, 34, row_x_2, row_y_2, -1.60, 0, 2)
+fp.pin_row(35, 67, row_x_3, row_y_3, -1.60, 0, 2)
+fp.pin_row(36, 68, row_x_4, row_y_4, -1.60, 0, 2)
+
+# Connector outline (excluding mating part, which extends past the edge of the PCB)
+ol_x1 = -32.35 / 2 - 42.70 / 2
+ol_y1 = row_y_4 - 5.50
+ol_x2 = ol_x1 + 42.70
+ol_y2 = ol_y1 + (14.65 - 5.20)
+fp.silk_rect(ol_x1, ol_y1, ol_x2, ol_y2)
+
+fp.trailer()
+fp.square = True
+fp.through_hole = False
+fp.pin_clearance = old_clearance
+
+########
+
+#FIXME - Gen two rows
+# Avago AEDR series optical encoders
+fp.file = file('footprints/ic/AEDR', 'w')
+fp.pad_width = 0.72
+fp.pad_height = 1.08
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 6
+gen.pin_pitch = 1.96
+gen.row_pitch = 0.94 * 2 + fp.pad_width
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+# Avago ADBS series OFN sensors
+fp.file = file('footprints/ic/ADBS', 'w')
+fp.pad_width = 0.35
+fp.pad_height = 0.45
+gen = Generate_QFN()
+gen.num_pins = 28
+gen.pin_pitch = 0.65
+gen.package_size = 6.00
+gen.inside = 6.20 - fp.pad_height * 2
+gen.dap_width = 2.60
+gen.dap_height = 2.00
+gen.run(fp)
+
+########
+
+# Osram LRTB-R98G RGB LED
+fp.file = file('footprints/ic/LRTB-R98G', 'w')
+fp.header()
+
+# Outside four pads
+fp.pad_width = 0.5
+fp.pad_height = 0.5
+x = 0.2 + 0.3 + fp.pad_width/2
+y = 0.4 + fp.pad_height/2
+fp.pin(1, -x, -y)
+fp.pin(3, x, -y)
+fp.pin(4, x, y)
+fp.pin(6, -x, y)
+
+# Inside two pads
+fp.pad_width = 0.4
+fp.pad_height = 0.5
+y = 0.4 + 0.1 + fp.pad_height/2
+fp.pin(2, 0, -y)
+fp.pin(5, 0, y)
+
+x = 0.2 + 0.3 + 0.5 + fp.silk_width * 1.5
+y = 0.4 + 0.5 + 0.1 + fp.silk_width * 1.5
+fp.silk_rect(-x, -y, x, y)
+fp.silk_line(-x, -y + 0.5, -x + 0.5, -y)
+
+fp.trailer()
+
+########
+
+# Cree CLP6C-FKB RGB LED
+fp.file = file('footprints/ic/CLP6C-FKB', 'w')
+fp.pad_width = 1.4 + 0.3
+fp.pad_height = 1.5 + 0.3
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 6
+gen.pin_pitch = 2.1
+gen.row_pitch = 5.7 - 1.5
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+# Soberton ST-0503 magnetic buzzer
+fp.file = file('footprints/ic/ST-0503', 'w')
+fp.header()
+fp.pad_width = 1.5
+fp.pad_height = 1.1
+fp.pin('M1', -(3 + 1.5) / 2, (1.4 + 1.1) / 2)
+fp.pin('M2', (3 + 1.5) / 2, (1.4 + 1.1) / 2)
+fp.pad_width = 1.8
+fp.pin('1', -(2.4 + 1.8) / 2, -(1.4 + 1.1) / 2)
+fp.pin('2', (2.4 + 1.8) / 2, -(1.4 + 1.1) / 2)
+fp.trailer()
+
+########
+
+fp.file = file('footprints/ic/TSOT-6', 'w')
+fp.pad_width = 0.69
+fp.pad_height = 1
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 6
+gen.pin_pitch = 0.95
+gen.row_pitch = 3.6 - fp.pad_height
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/connector/fuse-mini-auto', 'w')
+fp.header()
+fp.pin_drill_dia = 1.65
+fp.pin_copper_dia = 2.65
+fp.through_hole = True
+fp.square = False
+fp.pin('1', -4.47 / 2 - 3.66, 0)
+fp.pin('1', -4.47 / 2, 0)
+fp.pin('2', 4.47 / 2, 0)
+fp.pin('2', 4.47 / 2 + 3.66, 0)
+fp.silk_rect(-10.9/2, -3.8/2, 10.9/2, 3.8/2)
+fp.trailer()
+fp.through_hole = False
+fp.square = True
+
+########
+
+# Murata Ceralock CSTCE-*-G
+fp.file = file('footprints/oscillator/CSTCE-G', 'w')
+fp.header()
+fp.pad_width = 0.4
+fp.pad_height = 2.0
+fp.pin_row(1, 3, -1.2, 0, 1.2, 0)
+fp.trailer()
+
+########
+
+# Murata OKI-78SR series DC-DC converters
+fp.file = file('footprints/ic/OKI-78SR', 'w')
+fp.header()
+fp.pin_drill_dia = mil_to_mm(60)
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(30)
+fp.through_hole = True
+fp.square = True
+fp.pin('1', 0, 0)
+fp.square = False
+fp.pin('2', mil_to_mm(100), 0)
+fp.pin('3', mil_to_mm(200), 0)
+fp.silk_rect(-mil_to_mm(105), -mil_to_mm(110), mil_to_mm(305), mil_to_mm(190))
+fp.trailer()
+
+########
+
+# Mini/low-profile PC-mount fuse holder
+fp.file = file('footprints/connector/fuse-keystone-3557-2', 'w')
+fp.header()
+fp.pin_drill_dia = 1.70
+fp.pin_copper_dia = fp.pin_drill_dia + 1.0
+fp.through_hole = True
+fp.square = False
+fp.pin('1', -13.5 / 2, -3.4 / 2)
+fp.pin('1', -13.5 / 2, 3.4 / 2)
+fp.pin('2',  13.5 / 2, -3.4 / 2)
+fp.pin('2',  13.5 / 2, 3.4 / 2)
+fp.silk_rect(-19.8/2, -6.8/2, 19.8/2, 6.8/2)
+fp.trailer()
+fp.through_hole = False
+fp.square = True
+
+########
+
+fp.file = file('footprints/connector/usb-micro-b-10118194', 'w')
+fp.header()
+
+# Signal pads
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 0.4
+fp.pad_height = 1.34
+fp.pin_row(1, 5, -1.3, 2.7, 0.65, 0)
+
+# Use round holes instead of oblong holes like the manufacturer's drawing suggests.
+# Rear mounting holes
+fp.through_hole = True
+fp.square = False
+fp.pin_drill_dia = 0.85
+fp.pin_copper_dia = 1.25
+fp.pin('M', -2.50, 2.70)
+fp.pin('M',  2.50, 2.70)
+
+# Middle mounting holes
+fp.pin_drill_dia = 0.85
+fp.pin_copper_dia = 1.25
+fp.pin('M', -3.50, 0)
+fp.pin('M',  3.50, 0)
+
+# Middle mounting pads
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 1.65
+fp.pad_height = 1.55
+fp.pin('M', -3.125, 0)
+fp.pin('M',  3.125, 0)
+
+fp.pad_width = 1.50
+fp.pin('M', -1, 0)
+fp.pin('M',  1, 0)
+
+fp.silk_rect(-3.5, -1.45, 3.5, 3)
+
+fp.trailer()
+
+########
+
+# Diode SOD-923/514AA
+fp.file = file('footprints/diode/SOD-923', 'w')
+fp.header()
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 0.36
+fp.pad_height = 0.25
+dx = 1.2 - fp.pad_width
+fp.pin_row(1, 2, -dx / 2, 0, dx, 0)
+fp.silk_rect(-0.4, -0.3, 0.4, 0.3)
+fp.silk_line(-0.2, -0.3, -0.2, 0.3)
+fp.trailer()
+
+########
+
+fp.file = file('footprints/ic/ti-dcu', 'w')
+fp.pad_width = 0.3
+fp.pad_height = 0.8
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 8
+gen.pin_pitch = 0.5
+gen.row_pitch = 3.1
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/connector/ZX80-B-5P', 'w')
+fp.through_hole = False
+fp.pad_width = 0.4
+fp.pad_height = 1.3
+fp.header()
+fp.pin_row(1, 5, -1.3, 3.3 - 1.3 / 2, 0.65, 0)
+fp.through_hole = True
+fp.square = False
+fp.pin_drill_dia = 1.1
+fp.pin_copper_dia = 1.8
+fp.pin('M', -7.22 / 2, 1.34)
+fp.pin('M',  7.22 / 2, 1.34)
+fp.pin_drill_dia = 1.2
+fp.pin_copper_dia = 1.9
+fp.pin('M', -1.2, 0)
+fp.pin('M',  1.2, 0)
+fp.silk_rect(-8.1/2, -0.46, 8.1/2, 1.34 + 1.2)
+fp.trailer()
+
+########
+
+# Y=0 is the center of the mounting hole.
+# +Y is toward the mating side.
+fp.file = file('footprints/connector/43650-0300', 'w')
+fp.through_hole = True
+fp.pin_drill_dia = 1.024
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(14)
+fp.header()
+fp.square = True
+fp.pin(1, 3, 4.32)
+fp.square = False
+fp.pin(2, 0, 4.32)
+fp.pin(3, -3, 4.32)
+fp.pin_drill_dia = 3
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(14)
+fp.pin('M', 0, 0)
+fp.silk_rect(-6.4, -10, 6.4, 9.9 - 4.6)
+fp.trailer()
+
+########
+
+# Y=0 is the center of the mounting pads.
+# +Y is toward the mating side.
+fp.file = file('footprints/connector/43650-0312', 'w')
+fp.through_hole = False
+fp.square = True
+fp.header()
+fp.pad_width = 1.27
+fp.pad_height = 2.92
+n = 3
+fp.pin_row(1, 3, 3 * int(n/2), 6.93 - fp.pad_height / 2, -3, 0)
+
+fp.pad_width = 3.43
+fp.pad_height = 1.65
+x = (17.2 - fp.pad_width) / 2
+fp.pin('M', -x, 0)
+fp.pin('M', x, 0)
+
+fp.silk_rect(-6.4, -10, 6.4, 9.9 - 4.6)
+fp.trailer()
+
+########
+
+# Johnson UMC surface mount connector
+fp.file = file('footprints/connector/128-0711-201', 'w')
+fp.through_hole = False
+fp.square = True
+fp.header()
+fp.pad_width = 1.05
+fp.pad_height = 1.00
+fp.pin(1, 1 + fp.pad_width / 2, 0)
+fp.pad_width = 2.20
+fp.pad_height = 1.05
+fp.pin(2, 0, (1.90 + fp.pad_height) / 2)
+fp.pin(2, 0, -(1.90 + fp.pad_height) / 2)
+fp.trailer()
+
+########
+
+# NKK JB series illuminated switches.
+fp.file = file('footprints/switch/nkk-jb', 'w')
+fp.header()
+
+fp.through_hole = True
+fp.pin_drill_dia = 1.0
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(20) * 2
+fp.square = True
+fp.pin(1, 2.54, 5.08)
+fp.square = False
+fp.pin(2, 2.54, -5.08)
+fp.pin('A', 0, 5.08)
+fp.pin('K', 0, -5.08)
+fp.pin(3, -2.54, 5.08)
+fp.pin(4, -2.54, -5.08)
+fp.silk_rect(-6, -6, 6, 6)
+
+fp.trailer()

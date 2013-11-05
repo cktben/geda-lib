@@ -1,0 +1,36 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from fpgen import *
+from math import *
+
+# Diameter of a circle that contains a rectangle
+def dia_for_rect(w, h):
+    return sqrt(w * w + h * h)
+
+fp = PCB_Footprint()
+
+fp.file = file('footprints/resistor/resistor-array-2-0606', 'w')
+fp.pad_width = 0.4
+fp.pad_height = 0.9
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 4
+gen.pin_pitch = 0.8
+gen.row_pitch = 1.7
+gen.body_width = 1.6
+gen.body_height = 1.6
+gen.outline = 'outside'
+gen.run(fp)
+
+fp.file = file('footprints/resistor/resistor-array-4-1206', 'w')
+fp.pad_width = 0.4
+fp.pad_height = 0.9
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 8
+gen.pin_pitch = 0.8
+gen.row_pitch = 1.7
+gen.body_width = 3.2
+gen.body_height = 1.6
+gen.outline = 'outside'
+gen.run(fp)
+

@@ -1,0 +1,67 @@
+#!/usr/bin/python
+
+from fpgen import *
+from math import *
+
+fp = PCB_Footprint()
+fp.pin_drill_dia = 0.7
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(12) * 2
+drill_dia = fp.pin_drill_dia
+copper_dia = fp.pin_copper_dia
+
+# PA series (single row)
+pitch = 2.0
+for num_pins in range(2, 16+1):
+    fp.through_hole = True
+    
+    ########
+    # Through-hole top entry
+    fp.file = file('footprints/sherlock/2mm-%02d-vert' % num_pins, 'w')
+    fp.header()
+    
+    fp.square = True
+    for pin in range(1, num_pins+1):
+        fp.pin(pin, -pitch * (pin - 1), 0)
+        fp.square = False
+    
+    fp.pin_drill_dia = drill_dia
+    fp.pin_copper_dia = copper_dia
+    
+    # Outline
+    w = pitch * (num_pins - 1)
+    h = 5.3 / 2.0
+    fp.silk_rect(-w - 2.0, -h, 2.0, h)
+    
+    x1 = -w * 2.0 / 3.0
+    x2 = -w * 1.0 / 3.0
+    y = -h + 1.0
+    fp.silk_line(x1, -h, x1, y)
+    fp.silk_line(x1, y, x2, y)
+    fp.silk_line(x2, y, x2, -h)
+    
+    fp.trailer()
+    fp.file.close()
+    
+    ########
+    # Through-hole side entry
+    
+    fp.file = file('footprints/sherlock/2mm-%02d-ra' % num_pins, 'w')
+    fp.header()
+    
+    fp.square = True
+    for pin in range(1, num_pins+1):
+        fp.pin(pin, -pitch * (pin - 1), 0)
+        fp.square = False
+    
+    fp.pin_drill_dia = drill_dia
+    fp.pin_copper_dia = copper_dia
+    
+    # Outline
+    fp.silk_rect(-w - 2.0, -3.5, 2.0, 8.2)
+    
+    fp.trailer()
+    fp.file.close()
+    
+    # FIXME - Surface mount top entry
+    # FIXME - Surface mount side entry
+

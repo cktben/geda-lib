@@ -1,0 +1,36 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from fpgen import *
+from math import *
+
+fp = PCB_Footprint()
+
+fp.through_hole = True
+fp.pin_drill_dia = 0.80
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(16)
+
+for n in range(4, 31):
+	if n < 10:
+		name = '84984-%d' % n
+	else:
+		name = '%d-84984-%d' % (n / 10, n % 10)
+
+	fp.file = file('footprints/te_84984/%s' % name, 'w')
+	fp.header()
+
+	fp.square = True
+	fp.pin(1, 0, 0)
+	fp.square = False
+	fp.pin_row(3, n, 2, 0, 2, 0, 2)
+	fp.pin_row(2, n, 1, 2, 2, 0, 2)
+
+	fp.silk_poly([
+		(-1.5, -0.5),
+		(-1.5, 2.0),
+		(-1.0, 2.5),
+		(n + 0.5, 2.5),
+		(n + 0.5, -0.5)
+	])
+
+	fp.trailer()

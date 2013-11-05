@@ -1,0 +1,37 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Two-row 0.100" pitch shrouded headers, from http://portal.fciconnect.com/Comergent//fci/drawing/75869.pdf
+
+from fpgen import *
+from math import *
+
+fp = PCB_Footprint()
+fp.through_hole = True
+fp.pin_drill_dia = 1.02
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(20)
+pitch = mil_to_mm(100)
+for n in (4, 6, 8, 10, 14, 16, 20, 26, 30, 34, 40, 50, 60, 64):
+	fp.file = file('footprints/shrouded_header/header_%d_shrouded' % n, 'w')
+	fp.header()
+	fp.square = True
+	fp.pin(1, 0, 0)
+	fp.square = False
+	fp.pin_row(3, n, pitch, 0, pitch, 0, 2)
+	fp.pin_row(2, n, 0, pitch, pitch, 0, 2)
+
+	# Outline
+	x = -(2.54 + 7.21) / 2
+	y = -(9.55 - 2.54) / 2
+	w = n/2 * 2.54 + 7.21
+	h = 9.55
+	fp.silk_rect(x, y, x + w, y + h)
+
+	# Key slot
+	xc = (n/2 - 1) * 2.54 / 2
+	y2 = y + mil_to_mm(30)
+	fp.silk_line(xc - 2.54, y2, xc + 2.54, y2)
+	fp.silk_line(xc - 2.54, y, xc - 2.54, y2)
+	fp.silk_line(xc + 2.54, y, xc + 2.54, y2)
+
+	fp.trailer()

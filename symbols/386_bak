@@ -1,0 +1,113 @@
+# This is the template file for creating symbols with tragesym
+# every line starting with '#' is a comment line.
+
+[options]
+# wordswap swaps labels if the pin is on the right side an looks like this:
+#   "PB1 (CLK)". That's useful for micro controller port labels
+# rotate_labels rotates the pintext of top and bottom pins
+#   this is useful for large symbols like FPGAs with more than 100 pins
+# sort_labels will sort the pins by it's labels
+#   useful for address ports, busses, ...
+wordswap=yes
+rotate_labels=yes
+sort_labels=no
+generate_pinseq=yes
+sym_width=1400
+pinwidthvertical=400
+pinwidthhorizontal=400
+
+[geda_attr]
+# name will be printed in the top of the symbol
+# if you have a device with slots, you'll have to use slot= and slotdef=
+# use comment= if there are special information you want to add
+version=20060113 1
+name=DS89C386
+device=DS89C386
+refdes=U?
+footprint=tssop48
+description=
+documentation=
+author=
+numslots=12
+slot=1
+slotdef=1:47,46,2,3
+slotdef=2:44,45,43,42
+slotdef=3:5,6,4,3
+slotdef=4:8,7,41,42
+slotdef=5:40,39,9,10
+slotdef=6:36,37,35,34
+slotdef=7:12,13,11,10
+slotdef=8:16,15,33,34
+slotdef=9:32,31,17,18
+slotdef=10:29,30,28,27
+slotdef=11:20,21,19,18
+slotdef=12:23,22,26,27
+#comment=
+#comment=
+#comment=
+
+[pins]
+# tabseparated list of pin descriptions
+# ----------------------------------------
+# pinnr is the physical number of the pin
+# seq is the pinseq= attribute, leave it blank if it doesn't matter
+# type can be (in, out, io, oc, oe, pas, tp, tri, clk, pwr)
+# style can be (line,dot,clk,dotclk,none). none if only want to add a net
+# posit. can be (l,r,t,b) or empty for nets
+# net specifies the name of the net.  or GND for example.
+# label represents the pinlabel.
+#	negation lines can be added with "\_" example: \_enable\_ 
+#	if you want to write a "\" use "\\" as escape sequence
+#-----------------------------------------------------
+#pinnr	seq	type	style	posit.	net	label	
+#-----------------------------------------------------
+1		pas	none	l		NC
+2	3	pas	line	r		RO_A
+3	4	pas	line	r		EN_AC
+4	3	pas	none	l		RO_C
+5	1	pas	none	l		RI_C
+6	2	pas	none	l		\_RI_C\_
+7	2	pas	none	l		\_RI_D\_
+8	1	pas	none	l		RI_D
+9	3	pas	none	l		RO_E
+10	4	pas	none	l		EN_EG
+11	3	pas	none	l		RO_G
+12	1	pas	none	l		RI_G
+13	2	pas	none	l		\_RI_G\_
+14		pas	none	l		GND
+15	2	pas	none	l		\_RI_H\_
+16	1	pas	none	l		RI_H
+17	3	pas	none	l		RO_I
+18	4	pas	none	l		EN_IK
+19	3	pas	none	l		RO_K
+20	1	pas	none	l		RI_K
+21	2	pas	none	l		\_RI_K\_
+22	2	pas	none	l		\_RI_L\_
+23	1	pas	none	l		RI_L
+24		pas	none	l		GND
+
+48		pas	none	r		NC
+47	1	pas	line	l		RI_A
+46	2	pas	line	l		\_RI_A\_
+45	2	pas	none	r		\_RI_B\_
+44	1	pas	none	r		RI_B
+43	3	pas	none	r		RO_B
+42	4	pas	none	r		EN_BD
+41	3	pas	none	r		RO_D
+40	1	pas	none	r		RI_E
+39	2	pas	none	r		\_RI_E\_
+38		pas	none	r		Vcc
+37	2	pas	none	r		\_RI_F\_
+36	1	pas	none	r		RI_F
+35	3	pas	none	r		RO_F
+34	4	pas	none	r		EN_FH
+33	3	pas	none	r		RO_H
+32	1	pas	none	r		RI_I
+31	2	pas	none	r		\_RI_I\_
+30	2	pas	none	r		\_RI_J\_
+29	1	pas	none	r		RI_J
+28	3	pas	none	r		RO_J
+27	4	pas	none	r		EN_JL
+26	3	pas	none	r		RO_L
+25		pas	none	r		NC
+

@@ -1,0 +1,41 @@
+v 20060906 1
+P 800 500 400 500 1 0 0
+{
+T 550 550 5 8 0 1 0 6 1
+pinnumber=1
+T 550 550 5 8 0 0 0 6 1
+pinseq=1
+T 400 500 5 10 0 1 0 6 1
+pintype=io
+}
+T 100 700 8 10 1 1 0 0 1
+refdes=J?
+V 400 500 100 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+P 800 100 400 100 1 0 0
+{
+T 550 150 5 8 0 1 0 6 1
+pinnumber=GND
+T 550 150 5 8 0 0 0 6 1
+pinseq=2
+T 800 100 3 8 1 1 0 6 1
+pinlabel=GND
+T 400 100 5 10 0 1 0 6 1
+pintype=pwr
+}
+L 400 500 0 500 3 0 0 0 -1 -1
+L 0 600 100 500 3 0 0 0 -1 -1
+L 100 500 0 400 3 0 0 0 -1 -1
+L 400 400 400 100 3 0 0 0 -1 -1
+L 400 100 100 100 3 0 0 0 -1 -1
+L 100 100 0 200 3 0 0 0 -1 -1
+L 100 100 0 0 3 0 0 0 -1 -1
+T 100 1650 8 10 0 0 0 0 1
+footprint=AMPHENOL_31_71043
+T 100 1450 8 10 0 0 0 0 1
+description=75 Ohm BNC connector, 90 Degree Angle, PC Mount, Female
+T 91 1850 8 10 0 0 0 0 1
+device=31-71043
+T 91 2050 8 10 0 0 0 0 1
+numslots=0
+T 91 2250 8 10 0 0 0 0 1
+documentation=http://www.amphenolrf.com/part_detail.asp?amphenolNumber=31-71043

@@ -1,0 +1,162 @@
+v 20100214 2
+P 0 2600 300 2600 1 0 0
+{
+T 200 2650 5 8 1 1 0 6 1
+pinnumber=1
+T 200 2550 5 8 0 1 0 8 1
+pinseq=1
+T 350 2600 9 8 1 1 0 0 1
+pinlabel=COMM
+T 350 2600 5 8 0 1 0 2 1
+pintype=pas
+}
+P 0 2200 300 2200 1 0 0
+{
+T 200 2250 5 8 1 1 0 6 1
+pinnumber=2
+T 200 2150 5 8 0 1 0 8 1
+pinseq=2
+T 350 2200 9 8 1 1 0 0 1
+pinlabel=INPA
+T 350 2200 5 8 0 1 0 2 1
+pintype=pas
+}
+P 0 1800 300 1800 1 0 0
+{
+T 200 1850 5 8 1 1 0 6 1
+pinnumber=3
+T 200 1750 5 8 0 1 0 8 1
+pinseq=3
+T 350 1800 9 8 1 1 0 0 1
+pinlabel=OFSA
+T 350 1800 5 8 0 1 0 2 1
+pintype=pas
+}
+P 0 1400 300 1400 1 0 0
+{
+T 200 1450 5 8 1 1 0 6 1
+pinnumber=4
+T 200 1350 5 8 0 1 0 8 1
+pinseq=4
+T 350 1400 9 8 1 1 0 0 1
+pinlabel=VPOS
+T 350 1400 5 8 0 1 0 2 1
+pintype=pas
+}
+P 0 1000 300 1000 1 0 0
+{
+T 200 1050 5 8 1 1 0 6 1
+pinnumber=5
+T 200 950 5 8 0 1 0 8 1
+pinseq=5
+T 350 1000 9 8 1 1 0 0 1
+pinlabel=OFSB
+T 350 1000 5 8 0 1 0 2 1
+pintype=pas
+}
+P 0 600 300 600 1 0 0
+{
+T 200 650 5 8 1 1 0 6 1
+pinnumber=6
+T 200 550 5 8 0 1 0 8 1
+pinseq=6
+T 350 600 9 8 1 1 0 0 1
+pinlabel=INPB
+T 350 600 5 8 0 1 0 2 1
+pintype=pas
+}
+P 0 200 300 200 1 0 0
+{
+T 200 250 5 8 1 1 0 6 1
+pinnumber=7
+T 200 150 5 8 0 1 0 8 1
+pinseq=7
+T 350 200 9 8 1 1 0 0 1
+pinlabel=COMM
+T 350 200 5 8 0 1 0 2 1
+pintype=pas
+}
+P 2000 2600 1700 2600 1 0 0
+{
+T 1800 2650 5 8 1 1 0 0 1
+pinnumber=14
+T 1800 2550 5 8 0 1 0 2 1
+pinseq=8
+T 1650 2600 9 8 1 1 0 6 1
+pinlabel=MFLT
+T 1650 2600 5 8 0 1 0 8 1
+pintype=pas
+}
+P 2000 2200 1700 2200 1 0 0
+{
+T 1800 2250 5 8 1 1 0 0 1
+pinnumber=13
+T 1800 2150 5 8 0 1 0 2 1
+pinseq=9
+T 1650 2200 9 8 1 1 0 6 1
+pinlabel=VMAG
+T 1650 2200 5 8 0 1 0 8 1
+pintype=pas
+}
+P 2000 1800 1700 1800 1 0 0
+{
+T 1800 1850 5 8 1 1 0 0 1
+pinnumber=12
+T 1800 1750 5 8 0 1 0 2 1
+pinseq=10
+T 1650 1800 9 8 1 1 0 6 1
+pinlabel=MSET
+T 1650 1800 5 8 0 1 0 8 1
+pintype=pas
+}
+P 2000 1400 1700 1400 1 0 0
+{
+T 1800 1450 5 8 1 1 0 0 1
+pinnumber=11
+T 1800 1350 5 8 0 1 0 2 1
+pinseq=11
+T 1650 1400 9 8 1 1 0 6 1
+pinlabel=VREF
+T 1650 1400 5 8 0 1 0 8 1
+pintype=pas
+}
+P 2000 1000 1700 1000 1 0 0
+{
+T 1800 1050 5 8 1 1 0 0 1
+pinnumber=10
+T 1800 950 5 8 0 1 0 2 1
+pinseq=12
+T 1650 1000 9 8 1 1 0 6 1
+pinlabel=PSET
+T 1650 1000 5 8 0 1 0 8 1
+pintype=pas
+}
+P 2000 600 1700 600 1 0 0
+{
+T 1800 650 5 8 1 1 0 0 1
+pinnumber=9
+T 1800 550 5 8 0 1 0 2 1
+pinseq=13
+T 1650 600 9 8 1 1 0 6 1
+pinlabel=VPHS
+T 1650 600 5 8 0 1 0 8 1
+pintype=pas
+}
+P 2000 200 1700 200 1 0 0
+{
+T 1800 250 5 8 1 1 0 0 1
+pinnumber=8
+T 1800 150 5 8 0 1 0 2 1
+pinseq=14
+T 1650 200 9 8 1 1 0 6 1
+pinlabel=PFLT
+T 1650 200 5 8 0 1 0 8 1
+pintype=pas
+}
+B 300 0 1400 2900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 300 3100 8 10 1 1 0 0 1
+refdes=U?
+T 300 3500 5 10 0 0 0 0 1
+footprint=TSSOP14
+T 300 2900 8 10 1 1 0 0 1
+value=AD8302

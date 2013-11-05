@@ -1,0 +1,33 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from fpgen import *
+from math import *
+
+# Diameter of a circle that contains a rectangle
+def dia_for_rect(w, h):
+    return sqrt(w * w + h * h)
+
+fp = PCB_Footprint()
+
+fp.file = file('footprints/ic/power56', 'w')
+# External pads
+fp.pad_width = 0.65
+fp.pad_height = 0.63
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 8
+gen.pin_pitch = 1.27
+gen.row_pitch = 5.67
+gen.body_width = 5.0
+gen.body_height = 6.0
+gen.outline = 'outside-notched'
+gen.add_trailer = False
+gen.run(fp)
+# Internal pads
+fp.pad_width = 4.0
+fp.pad_height = 2.67
+fp.pin(9, 0, 0.79)
+fp.pad_height = 0.92
+fp.pin(10, 0, -1.665)
+fp.trailer()
+
