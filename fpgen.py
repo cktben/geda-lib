@@ -257,7 +257,8 @@ class Generate_SMD_Two_Rows:
             fp.pad_width = old_width
             fp.pad_height = old_height
 
-        self.make_outline(fp)
+        if self.outline != 'none':
+            self.make_outline(fp)
 
         if self.add_trailer:
 			fp.trailer()
