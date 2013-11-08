@@ -1193,3 +1193,20 @@ fp.pin('S', 2.54, -10)
 fp.silk_rect(-7.5, -13, 7.5, 6)
 
 fp.trailer()
+
+########
+
+# Coilcraft DA2034-AL
+fp.file = file('footprints/transformer/DA2034-AL', 'w')
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 1.27
+fp.pad_height = 3.30
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 12
+gen.pin_pitch = 3.00
+gen.row_pitch = 23.62 + fp.pad_height
+gen.outline = 'inside-line'
+gen.body_width = 20.57
+gen.body_height = 30.00
+gen.run(fp)
