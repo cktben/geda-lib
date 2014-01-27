@@ -1066,6 +1066,22 @@ fp.trailer()
 
 ########
 
+# Diode SOD-523/SC-79
+fp.file = file('footprints/diode/SOD-523', 'w')
+fp.header()
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 0.80
+fp.pad_height = 0.60
+fp.pin_row(1, 2, -0.55, 0, 1.1, 0)
+fp.silk_rect(-1.1, -0.6, 1.1, 0.6)
+fp.silk_line(-1.5, -0.4, -1.5, 0.4)
+fp.silk_line(-1.5, -0.4, -1.1, -0.6)
+fp.silk_line(-1.5, 0.4, -1.1, 0.6)
+fp.trailer()
+
+########
+
 fp.file = file('footprints/ic/ti-dcu', 'w')
 fp.pad_width = 0.3
 fp.pad_height = 0.8
