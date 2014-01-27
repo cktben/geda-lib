@@ -977,7 +977,7 @@ fp.trailer()
 # Murata OKI-78SR series DC-DC converters
 fp.file = file('footprints/ic/OKI-78SR', 'w')
 fp.header()
-fp.pin_drill_dia = mil_to_mm(60)
+fp.pin_drill_dia = mil_to_mm(50)
 fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(30)
 fp.through_hole = True
 fp.square = True
