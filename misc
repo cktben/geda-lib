@@ -1226,3 +1226,59 @@ gen.outline = 'inside-line'
 gen.body_width = 20.57
 gen.body_height = 30.00
 gen.run(fp)
+
+########
+
+fp.file = file('footprints/filter/filter-1206-4', 'w')
+fp.header()
+
+# Ground pads
+fp.pad_width = 0.6
+fp.pad_height = 0.8
+fp.pin('3', 0, 0.6/2 + fp.pad_height/2)
+fp.pin('4', 0, -(0.6/2 + fp.pad_height/2))
+
+# Signal pads
+fp.pad_width = 1.5
+fp.pad_height = 1.15
+fp.pin('1', -(2.2/2 + fp.pad_width/2), 0)
+fp.pin('2', 2.2/2 + fp.pad_width/2, 0)
+
+fp.silk_rect(-3.2/2, -1.6/2, 3.2/2, 1.6/2)
+
+fp.trailer()
+
+########
+
+fp.file = file('footprints/filter/filter-0603-4', 'w')
+fp.header()
+
+# Ground pads
+fp.pad_width = 0.3
+fp.pad_height = 0.4
+fp.pin('3', 0, 0.3/2 + fp.pad_height/2)
+fp.pin('4', 0, -(0.3/2 + fp.pad_height/2))
+
+# Signal pads
+fp.pad_width = 0.8
+fp.pad_height = 0.6
+fp.pin('1', -(1.1/2 + fp.pad_width/2), 0)
+fp.pin('2', 1.1/2 + fp.pad_width/2, 0)
+
+fp.silk_rect(-1.6/2, -0.8/2, 1.6/2, 0.8/2)
+
+fp.trailer()
+
+########
+
+fp.file = file('footprints/filter/filter-0603-6', 'w')
+fp.pad_width = 0.3
+fp.pad_height = 0.65
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 6
+gen.pin_pitch = 0.55
+gen.row_pitch = 0.25 + 0.65
+gen.body_width = 1.6
+gen.body_height = 0.8
+gen.outline = 'outside'
+gen.run(fp)
