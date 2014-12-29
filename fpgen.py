@@ -13,6 +13,9 @@ def mm_to_mil(mm):
 def mil_to_mm(mil):
     return mil * 25.4 / 1000.0
 
+def in_to_mm(i):
+    return i * 25.4
+
 def sgn(x):
     if x < 0:
         return -1
@@ -88,6 +91,10 @@ class Footprint:
             x = x1 + (pin - first_pin) / dpin * dx
             y = y1 + (pin - first_pin) / dpin * dy
             self.pin(pin, x, y)
+
+            # Only pin 1 is square for through-hole footprints.
+            if self.through_hole:
+                self.square = False
     
     def silk_line(self, x1, y1, x2, y2):
         print 'silk line', x1, ',', y1, ' to', x2, ',', y2

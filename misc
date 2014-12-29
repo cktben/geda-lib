@@ -97,6 +97,26 @@ fp.trailer()
 
 ########
 
+fp.file = file('footprints/oscillator/xtal-5.0x3.2', 'w')
+fp.pad_width = 2.0
+fp.pad_height = 1.2
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 4
+gen.pin_pitch = 3.7
+gen.row_pitch = 2.2
+gen.outline = 'outside-notched'
+fp.header()
+x1 = gen.pin_pitch / 2.0
+y1 = gen.row_pitch / 2.0
+fp.pin(1, -x1, -y1)
+fp.pin('', x1, -y1)
+fp.pin(2, x1, y1)
+fp.pin('', -x1, y1)
+gen.make_outline(fp)
+fp.trailer()
+
+########
+
 fp.file = file('footprints/oscillator/xtal-8.0x4.5', 'w')
 fp.pad_width = 3.0
 fp.pad_height = 2.5
@@ -1282,3 +1302,30 @@ gen.body_width = 1.6
 gen.body_height = 0.8
 gen.outline = 'outside'
 gen.run(fp)
+
+########
+
+# Norcomp 112-024-113R001
+# 24-pin Centronics connector, through-hole, right angle.
+
+fp.file = file('footprints/connector/centronics-24', 'w')
+fp.header()
+fp.through_hole = True
+fp.square = True
+
+# Electrical pins
+fp.pin_drill_dia = mil_to_mm(35)
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(12) * 2
+fp.pin_row( 1, 12, in_to_mm(-0.085 * 11 / 2), in_to_mm(0.417 + 0.1689 / 2), in_to_mm(0.085), 0)
+fp.pin_row(13, 24, in_to_mm(-0.085 * 11 / 2), in_to_mm(0.417 - 0.1689 / 2), in_to_mm(0.085), 0)
+
+# Mounting holes
+fp.pin_drill_dia = mil_to_mm(126)
+fp.pin_copper_dia = fp.pin_drill_dia + mil_to_mm(25) * 2
+fp.pin('M', in_to_mm(-1.843 / 2), in_to_mm(0.417))
+fp.pin('M', in_to_mm( 1.843 / 2), in_to_mm(0.417))
+
+# Silkscreen outline, aligned with the edge of the board.
+fp.silk_rect(in_to_mm(-2.146 / 2), 0, in_to_mm(2.146 / 2), in_to_mm(0.984 - 0.335))
+
+fp.trailer()
