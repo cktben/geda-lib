@@ -24,3 +24,22 @@ for row in range(0, 9):
     for col in range(0, 6):
         fp.pin(row_letters[row] + str(col + 1), -col * spacing, row * spacing)
 fp.trailer()
+
+########
+
+fp = PCB_Footprint()
+
+fp.file = file('footprints/misc/bga4', 'w')
+
+fp.square = False
+fp.pad_width = 0.30
+fp.pad_height = 0.30
+fp.mask = (0.41 - 0.30) / 2
+
+fp.header()
+fp.pin('1', -0.25, 0.25)
+fp.pin('2', 0.25, 0.25)
+fp.pin('3', 0.25, -0.25)
+fp.pin('4', -0.25, -0.25)
+fp.silk_rect(-0.8, -0.8, 0.8, 0.8)
+fp.trailer()

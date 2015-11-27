@@ -77,6 +77,26 @@ gen.run(fp)
 
 ########
 
+fp.file = file('footprints/oscillator/xtal-2.0x1.6', 'w')
+fp.pad_width = 0.75
+fp.pad_height = 0.65
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 4
+gen.pin_pitch = 0.55 + 0.75
+gen.row_pitch = 0.35 + 0.65
+gen.outline = 'outside-notched'
+fp.header()
+x1 = gen.pin_pitch / 2.0
+y1 = gen.row_pitch / 2.0
+fp.pin(1, -x1, -y1)
+fp.pin('', x1, -y1)
+fp.pin(2, x1, y1)
+fp.pin('', -x1, y1)
+gen.make_outline(fp)
+fp.trailer()
+
+########
+
 fp.file = file('footprints/oscillator/xtal-3.2x2.5', 'w')
 fp.pad_width = 1.4
 fp.pad_height = 1.2
@@ -238,6 +258,20 @@ fp.pad_height = 3.85
 gen.row_pitch = 13.8 - fp.pad_height
 gen.body_width = 12.5
 gen.body_height = 12.5
+gen.run(fp)
+
+########
+
+fp.file = file('footprints/inductor/VLF302515MT', 'w')
+fp.pad_width = 1.0
+fp.pad_height = 0.7
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = 0.8 + fp.pad_height
+gen.body_width = 3.0
+gen.body_height = 2.5
+gen.outline = 'outside'
 gen.run(fp)
 
 ########
@@ -1114,6 +1148,23 @@ gen.run(fp)
 
 ########
 
+# From LTC3454 datasheet.
+fp.file = file('footprints/ic/DFN10-EP', 'w')
+fp.pad_width = 0.25
+fp.pad_height = 0.675
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 10
+gen.pin_pitch = 0.5
+gen.row_pitch = (3.5 + 2.15) / 2
+gen.dap_width = 2.38
+gen.dap_height = 1.65
+gen.body_width = 3.0
+gen.body_height = 3.0
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
 fp.file = file('footprints/connector/ZX80-B-5P', 'w')
 fp.through_hole = False
 fp.pad_width = 0.4
@@ -1329,3 +1380,54 @@ fp.pin('M', in_to_mm( 1.843 / 2), in_to_mm(0.417))
 fp.silk_rect(in_to_mm(-2.146 / 2), 0, in_to_mm(2.146 / 2), in_to_mm(0.984 - 0.335))
 
 fp.trailer()
+
+########
+
+# Cree XLamp XM-L LED
+
+fp.file = file('footprints/misc/cree-xml', 'w')
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 1.120
+fp.pad_height = 0.70
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 8
+gen.pin_pitch = -(1.120 + 0.250)
+gen.row_pitch = 5.0 - 0.70
+gen.dap_width = 5.0
+gen.dap_height = 2.9
+gen.body_width = 5.0
+gen.body_height = 5.0
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+# Osram SFH 4441
+
+fp.file = file('footprints/misc/osram-sfh4441', 'w')
+fp.through_hole = False
+fp.square = True
+fp.pad_width = 2.1
+fp.pad_height = (2.8 - 1.2) / 2
+gen = Generate_SMD_Two_Rows()
+gen.num_pins = 2
+gen.pin_pitch = 0
+gen.row_pitch = (1.2 + 2.8) / 2
+gen.body_width = 1.95
+gen.body_height = 2.3
+gen.outline = 'outside-notched'
+gen.run(fp)
+
+########
+
+# For MPU-9250
+fp.file = file('footprints/ic/QFN24_3', 'w')
+fp.pad_width = 0.20
+fp.pad_height = 0.50
+gen = Generate_QFN()
+gen.num_pins = 24
+gen.pin_pitch = 0.40
+gen.package_size = 3.00
+gen.inside = 2.6
+gen.run(fp)
